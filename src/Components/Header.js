@@ -12,7 +12,6 @@ class Header extends Component {
         this.logOut = this.logOut.bind(this);
 
         this.state = {
-
             showAdminBoard: false,
             currentUser: undefined,
         };
@@ -83,7 +82,6 @@ class Header extends Component {
 
     render() {
         const { currentUser, showAdminBoard } = this.state;
-
         return (
 
             <div className="noprint">

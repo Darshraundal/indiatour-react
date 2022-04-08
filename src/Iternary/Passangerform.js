@@ -13,7 +13,6 @@ function Passangerform() {
     const [Passanger, setPassanger] = useState({});
     const { smid, bkid, cid } = useParams();
 
-
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
