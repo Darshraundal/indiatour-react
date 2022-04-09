@@ -1,6 +1,7 @@
 import './Search.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
 
 function Search() {
 
@@ -54,6 +55,7 @@ function Search() {
         setMaximumcost("");
         setDay("")
         setSearchbyperiod("");
+
     }
 
     const [cost, setCost] = useState([]);
@@ -65,7 +67,7 @@ function Search() {
     }, []);
 
 
-    const [minimumcost, setMinimumcost] = useState();
+    const [minimumcost, setMinimumcost] = useState(0);
     const [maximumcost, setMaximumcost] = useState();
 
     const mincostchange = (event) => {
@@ -101,11 +103,15 @@ function Search() {
     }
 
     const handledaychange = () => {
-        const newdays=pack.filter(pkg =>{return (calD(pkg.enddate,pkg.startdate) == day)})
+        const newdays = pack.filter(pkg => { return (calD(pkg.enddate, pkg.startdate) == day) })
         console.log(newdays);
-          setSearchbyperiod(newdays)
+        setSearchbyperiod(newdays)
     }
-
+    function currentdate(today) {
+        // const today = new Date();
+        const bookingdates = `${today.getFullYear()}-${(today.getMonth() + 1) < 10 ? `0${(today.getMonth() + 1)}` : `${(today.getMonth() + 1)}`}-${(today.getDate()) < 10 ? `0${(today.getDate())}` : `${(today.getDate())}`}`;
+        return bookingdates;
+    }
 
 
     return (
@@ -121,12 +127,13 @@ function Search() {
                             <div className="input-group mb-2">
                                 <span className="input-group-text" id="basic-addon1">From</span>
                                 <input id="date1" type="date" className="form-control" name="startdates" placeholder="From..." aria-label="from"
-                                    aria-describedby="basic-addon1" onChange={handlestartdatechange} />
+                                    aria-describedby="basic-addon1" onChange={handlestartdatechange} min={currentdate(new Date())}
+                                />
                             </div>
                             <div className="input-group mb-2">
                                 <span className="input-group-text" id="basic-addon1">To&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                                <input id="date2" type="date" className="form-control" name="enddates" placeholder="To..." aria-label="from"
-                                    aria-describedby="basic-addon1" onChange={handleenddatechange} />
+                                <input id="date2" type="date" className="form-control" name="enddates" placeholder="To..." aria-label="from" aria-describedby="basic-addon1" onChange={handleenddatechange} min={currentdate(new Date())}
+                                />
                             </div>
                             <button type="button" className="btn btn-secondary mt-1 mb-2" onClick={handleSubmit}>Search</button>
                             <button type="button" className="btn btn-secondary ms-2 mt-1 mb-2" onClick={ClearFields}>Clear</button>
@@ -141,8 +148,7 @@ function Search() {
 
                             <div className="input-group mb-2">
                                 <span className="input-group-text" id="basic-addon1">From</span>
-                                <input type="text" name="mincost" id="min" className="form-control" placeholder="Min..." aria-label="from"
-                                    aria-describedby="basic-addon1" onChange={mincostchange} />
+                                <input type="text" name="mincost" id="min" className="form-control" placeholder="Min..." aria-label="from" aria-describedby="basic-addon1" onChange={mincostchange} range="0" />
                             </div>
                             <div className="input-group mb-2">
                                 <span className="input-group-text" id="basic-addon1">To&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -185,6 +191,7 @@ function Search() {
                                                         <th scope="col">Tour name</th>
                                                         <th scope="col">Start Date</th>
                                                         <th scope="col">End Date</th>
+                                                        <th scope="col">Book Tour</th>
                                                     </tr>
                                                 </thead>
 
@@ -196,6 +203,10 @@ function Search() {
                                                                 <td>{book.packagename}</td>
                                                                 <td>{book.startdate}</td>
                                                                 <td>{book.enddate}</td>
+                                                                <td>
+                                                                    <a href={`/Details/${book.sectormasterid}`}>
+                                                                        <Button className="btn btn-warning" type="submit">View Tour</Button></a>
+                                                                </td>
                                                             </tr>
                                                         </>
                                                     ))}

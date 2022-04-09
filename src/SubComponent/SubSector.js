@@ -79,7 +79,7 @@ function SubSector() {
                                                     {/* <Link to={stour.sectorid}>
                                                         <Button className="btn btn-info album_btn" type="submit">View More</Button>
                                                     </Link> */}
-                                                    <a href={'/Details/' + stour.sectormasterid}> <Button className="btn btn-info album_btn" type="submit">View More</Button></a>
+                                                    <a href={'/Details/' + stour.sectormasterid}> <Button className="btn btn-info album_btn" type="submit">View Details</Button></a>
 
                                                 </div>
                                             </div>
