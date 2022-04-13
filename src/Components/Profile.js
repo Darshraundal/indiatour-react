@@ -9,7 +9,7 @@ import html2canvas from 'html2canvas';
 function Profile() {
 
     const [customer, setCustomer] = useState([]);
-    const user = AuthService.getCurrentUser();
+    
     useEffect(() => {
         fetch("http://localhost:8080/api/auth/customer/" + user.cust_Id)
             .then(res => res.json())
@@ -57,8 +57,14 @@ function Profile() {
 
         window.location.reload(false);
     }
+    const user = AuthService.getCurrentUser();
+    useEffect(() => {
+        if(user.roles.includes("ROLE_ADMIN"))
+        {
+            window.location.replace("http://localhost:3000")
+        }
 
-
+    }, []);
    
 
 

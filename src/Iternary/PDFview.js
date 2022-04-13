@@ -9,6 +9,7 @@ import html2canvas from 'html2canvas';
 import { jsPDF } from "jspdf";
 
 import React from 'react';
+import AuthService from '../Services/auth.service';
 function PDFview() {
 
 
@@ -36,6 +37,15 @@ function PDFview() {
             .then(res => res.json())
             .then((result) => { setBooking(result); }
             );
+    }, []);
+
+    const user=AuthService.getCurrentUser();
+    useEffect(() => {
+        if(!user)
+        {
+            window.location.replace("http://localhost:3000/login")
+        }
+
     }, []);
 
     function calD(date1, date2) {

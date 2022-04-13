@@ -1,10 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import Button from 'react-bootstrap/esm/Button';
+import AuthService from '../Services/auth.service';
 
 
 function Admin(){
 
     const [booking, setBooking] = useState([]);
+    const user=AuthService.getCurrentUser();
     useEffect(() => {
         fetch("http://localhost:8080/allcanceltours/")
             .then(res => res.json())
@@ -40,6 +42,14 @@ function Admin(){
             return element.packageid === el.packageid;
         });
     });
+
+    useEffect(() => {
+        if(user.roles.includes("ROLE_USER"))
+        {
+            window.location.replace("http://localhost:3000")
+        }
+
+    }, []);
 
     return(
             <div className="container">

@@ -27,6 +27,7 @@ function App() {
          <Route exact path="/" element={<Home />} />
           <Route path="/:Id" element={<Sector />} />
           <Route exact path="/profile" element={<Profile/>} />
+          
           <Route exact path="/Admin" element={<Admin/>} />
           <Route exact path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

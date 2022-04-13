@@ -24,6 +24,15 @@ function Booknow(props) {
 
     }, []);
 
+    
+    useEffect(() => {
+        if(!user)
+        {
+            window.location.replace("http://localhost:3000/login")
+        }
+
+    }, []);
+
     const [Customers, setCustomers] = useState({});
    
     let navigate = useNavigate();
