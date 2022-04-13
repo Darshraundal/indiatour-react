@@ -7,6 +7,7 @@ import AuthService from "../Services/auth.service";
 import './Login.css';
 
 
+
 const required = value => {
   if (!value) {
     return (
@@ -31,11 +32,9 @@ class Login extends Component {
       password: "",
       loading: false,
       message: "",
+     
     };
   }
-
-  
-
 
   onChangeemail(e) {
     this.setState({
@@ -49,11 +48,11 @@ class Login extends Component {
     });
   }
 
-  onreload = function () {
-    let naviagate = useNavigate();
-    let user = AuthService.getCurrentUser();
-    (user != null) ? (naviagate("/About")) : (window.location.reload());
-  }
+  // onreload = function () {
+  //   let naviagate = useNavigate();
+  //   let user = AuthService.getCurrentUser();
+  //   (user != null) ? (naviagate("/About")) : (window.location.reload());
+  // }
 
   handleLogin(e) {
 
@@ -96,7 +95,10 @@ class Login extends Component {
   }
 
   render() {
+    
+    
     return (
+      
       <div className="col-md-12 ">
         <div className="ccard ccard-container mb-5">
           <img
